@@ -103,7 +103,10 @@ return (
           </View>
 
           <View style={{flex : 1,alignItems:'center'}} >
-          <TouchableHighlight style={styles.homeButton}>
+          <TouchableHighlight 
+          style={styles.homeButton}
+          onPress={this.redirect.bind(this,'LPrices',this.props.authData)}
+          >
           <Text style={styles.homeButtonText}>Laundry</Text>
           </TouchableHighlight>
           </View>

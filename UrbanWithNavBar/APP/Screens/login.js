@@ -138,8 +138,6 @@ onSkipPress(){
   render() {
     return (
      <View>
-        
-     
       <View style={styles.container}>
       <View style={styles.formWrapper}>
       <TextInput 

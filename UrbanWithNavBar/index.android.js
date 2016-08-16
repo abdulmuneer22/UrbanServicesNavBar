@@ -24,6 +24,10 @@ import UpdateAddress from './APP/Screens/updateAddress'
 import WaterCan from './APP/Screens/watercan'
 import MyCart from './APP/Screens/myCart'
 
+// Laundry imports
+import LPrices from './APP/Screens/Laundry/LPrices'
+
+
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import firebase from 'firebase';
 const firebaseConfig = {
@@ -80,7 +84,9 @@ const NavigationBarRouteMapper = {
             style={{fontFamily:'DroidSans',marginTop : 15,color : 'white',fontSize: 19,fontWeight:'bold',justifyContent : 'center',borderColor:'black',borderWidth: 1}}>
             Login</Text>
       case 'SplashScreen':
-            return null
+            return <Text 
+            style={{fontFamily:'DroidSans',marginTop : 15,color : 'white',fontSize: 19,fontWeight:'bold',justifyContent : 'center',borderColor:'black',borderWidth: 1}}>
+            Loading</Text>
       case 'mainScreen':
             return <Text 
             style={{marginTop : 15,marginLeft : 0,color : 'white',fontSize: 19,fontWeight:'bold',fontFamily:'DroidSans'}}>
@@ -93,6 +99,10 @@ const NavigationBarRouteMapper = {
             return <Text 
             style={{marginTop : 15,marginLeft : 0,color : 'white',fontSize: 19,fontWeight:'bold',fontFamily:'DroidSans'}}>
             Your Cart</Text>
+      case 'LPrices':
+            return <Text 
+            style={{marginTop : 15,marginLeft : 0,color : 'white',fontSize: 19,fontWeight:'bold',fontFamily:'DroidSans'}}>
+            Laundry Prices</Text>
 
     }
 
@@ -110,7 +120,6 @@ class UrbanWithNavBar extends Component {
   
   this.state = {
     _initialRoute : 'SplashScreen',
-    navBarColor : 'red'
   }
 
 
@@ -175,6 +184,10 @@ if(route.name == 'testview'){
     return <TestView  navigator={navigator} {...route.passProps} />
   }
 
+if(route.name == 'LPrices'){
+    return <LPrices  navigator={navigator} {...route.passProps} />
+  }
+
   
 }
 
@@ -206,6 +219,10 @@ configureScene(route){
 
 
        case 'updateAddress':
+      return Navigator.SceneConfigs.FadeAndroid
+
+
+       case 'LPrices':
       return Navigator.SceneConfigs.FadeAndroid
 
 

@@ -42,14 +42,17 @@ constructor(){
 
 
 
-onCheckout(){
+componentDidMount(){
 
 
 }
 
 placeOrder(){
-  var ab = firebase.auth.Error
-  alert(ab)
+  if(!firebase.auth().currentUser){
+     this.props.navigator.push({name:'login'})
+  }else{
+    this._placeOrder()
+  }
     
   }
 

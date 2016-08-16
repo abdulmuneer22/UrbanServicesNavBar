@@ -20,23 +20,72 @@ const firebaseConfig = {
   storageBucket: "samplesserver.appspot.com"
 };
 
+import GiftedSpinner from 'react-native-gifted-spinner';
 
 class SplashScreen extends Component {
+  constructor(){
+    super();
+    this.state={spinnerVisible : true}
+  }
   componentDidMount(){
     firebase.initializeApp(firebaseConfig)
+
+    
     setTimeout(()=>
-    {this.props.navigator.push({name:'login'})},
-    500
+    {
+        
+      
+        this.checkUserLogin()
+    
+    },
+    1000
       
       );
   }
 
+checkUserLogin(){
+if(!firebase.auth().currentUser){
+this.props.navigator.push({name:'login'})
+}else{
+this.props.navigator.push({name:'mainScreen'})
+}
 
+}
   render() {
     return (
-        <View></View>
+        <View style={{marginTop : 100}}>
+         {this.state.spinnerVisible?
+
+         <View>
+            <GiftedSpinner size={'large'} color={'#00bcd4'}/>
+            <Text style={{justifyContent:'center',textAlign:'center',color : '#00bcd4',marginTop : 10}}></Text>
+         </View>
+         :null}
+        </View>
     );
 
 }}
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#d35400',
+  },
+
+  spinner: {
+    marginBottom: 50
+  },
+
+  btn: {
+    marginTop: 20
+  },
+
+  text: {
+    color: "white"
+  }
+});
 
 export default SplashScreen

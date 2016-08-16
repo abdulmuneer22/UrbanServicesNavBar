@@ -19,7 +19,6 @@ import {
   Dimensions
 } from 'react-native';
 
-import NavigationBar from './NavigationBar'
 
 import GiftedSpinner from 'react-native-gifted-spinner';
 
@@ -30,7 +29,7 @@ const window = Dimensions.get('window');
 
 
 
-class WaterCan extends Component {
+class LPrices extends Component {
 constructor(props){
   super(props);
     
@@ -123,61 +122,16 @@ CanRef.on('value',(can)=>{
       
       
       <ScrollView showsVerticalScrollIndicator = {false} style={{}}>
-      {this.state.spinnerVisible?
+        <Image style = {styles.dpImage}
+        source={require('./res/prices.png')}/>
 
-         <View>
-            <GiftedSpinner size={'large'} color={'#00bcd4'}/>
-            <Text style={{justifyContent:'center',textAlign:'center',color : '#00bcd4',marginTop : 10}}>Please Wait..!!</Text>
-         </View>
-         :
-         
-            <ListView
-            dataSource = {this.state.dataSource}
-            renderRow = {
-            (rowData)=>
+        <TouchableHighlight 
+        style={styles.Button}
+        //onPress = {this.onSignInPress.bind(this)}
 
-            <View style={{borderColor:'#E0E0E0',borderWidth:1,marginBottom:20,borderRadius:1}}>
-
-            <View style={styles.productTitleWrapper}>
-            <Text style={styles.productTitle}>
-            {rowData.title}
-            </Text>
-
-            <Text style={{flex : 2}}></Text>
-            <Text style={styles.productPrice}>
-            {rowData.price}
-            </Text>
-
-
-
-            </View>
-
-            <Image
-            style = {styles.dpImage}
-            source = {{uri: rowData.imageurl}}
-            resizeMode = {Image.resizeMode.contain}
-
-            />
-            <TouchableHighlight 
-            style={styles.addToCartButton}
-            onPress = {this.addToCartButtonPressd.bind(this,rowData.sku,rowData.price,rowData.name)}
-
-            >
-            <Text style={styles.addToCartButtonText}>Add to Cart</Text>
-            </TouchableHighlight>
-
-
-            </View>
-
-            }
-
-
-            />
-        
-      }
-
-
-
+        >
+      <Text style={styles.ButtonText}>Proceed</Text>
+      </TouchableHighlight>
 
       
 
@@ -250,8 +204,32 @@ const styles = StyleSheet.create({
     fontSize : 16,
     fontWeight : 'bold',
     color : 'white'
+  },
+  Button : {
+  flexDirection : 'column',
+  alignItems : 'center',
+  width: window.width * 0.7, 
+  backgroundColor : '#039BE5', 
+  height : 45,
+  borderColor : '#039BE5',
+  borderWidth : 3,
+  borderRadius : 0.5,
+  justifyContent : 'center',
+  marginBottom :10,
+  marginTop : 30,
+  
+  },
+  SkipButton:{
+    backgroundColor : '#37474F',
+    borderColor : '#37474F'
+  },
+
+  ButtonText:{
+    fontSize : 16,
+    fontWeight : 'bold',
+    color : 'white'
   }
 });
 
 
-export default WaterCan
+export default LPrices
