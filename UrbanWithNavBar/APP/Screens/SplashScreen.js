@@ -20,6 +20,7 @@ const firebaseConfig = {
   storageBucket: "samplesserver.appspot.com"
 };
 
+
 class SplashScreen extends Component {
   componentDidMount(){
     firebase.initializeApp(firebaseConfig)

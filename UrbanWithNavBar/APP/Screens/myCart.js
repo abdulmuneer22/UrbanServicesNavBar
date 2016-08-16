@@ -60,6 +60,7 @@ _placeOrder(){
   var orderID = Date.now()
   var quantity = 1
   var vendorID = "W001"
+  
   var orderDate = "10102016"
   var UserID = firebase.auth().currentUser.uid
 
@@ -205,4 +206,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default My
+export default MyCart 

@@ -25,9 +25,15 @@ import WaterCan from './APP/Screens/watercan'
 import MyCart from './APP/Screens/myCart'
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
-
+import firebase from 'firebase';
+const firebaseConfig = {
+  apiKey: "AIzaSyDA2O-uRbNipOS3iKo5qRAg3Xd46u67Bg0",
+  authDomain: "samplesserver.firebaseapp.com",
+  databaseURL: "https://samplesserver.firebaseio.com",
+  storageBucket: "samplesserver.appspot.com"
+};
 const index =0
-
+const _navBarColor = ''
 const NavigationBarRouteMapper = {
     LeftButton(route, navigator, index, navState) {
 
@@ -38,7 +44,7 @@ const NavigationBarRouteMapper = {
             <TouchableHighlight
             underlayColor="transparent"
             style={{marginTop : 15,marginLeft : 10}}
-            onPress={() => { if (index > 0) { navigator.pop() } }}>
+            >
             <Icon name='account-circle' size={28} color={'white'} />
             </TouchableHighlight>)
       case 'mainScreen':
@@ -103,8 +109,10 @@ class UrbanWithNavBar extends Component {
   super();
   
   this.state = {
-    _initialRoute : 'SplashScreen'
+    _initialRoute : 'SplashScreen',
+    navBarColor : 'red'
   }
+
 
 }
 
@@ -210,7 +218,17 @@ configureScene(route){
 }
   
   
-  
+getNavColorFromFirebase(){
+  firebase.database().ref('AppProps/navBarColor').on('value',(snap)=>{
+    var color = snap.val()
+    alert(typeof(color))
+    this.setState({
+      navBarColor : color
+    })
+  })
+}
+
+
   render() {
     return (
       <Navigator 
@@ -222,7 +240,7 @@ configureScene(route){
       
       navigationBar={
       <Navigator.NavigationBar
-      style={styles.navBar}
+      style={{backgroundColor : "#00bcd4"}}
       routeMapper={NavigationBarRouteMapper} />
       }  
 
@@ -241,7 +259,7 @@ const styles = StyleSheet.create({
     margin:10
   },
   navBar: {
-        backgroundColor: '#00bcd4',
+        //backgroundColor: this.getNavBarColor(),
         alignItems : 'center',
         justifyContent : 'center'
     },
