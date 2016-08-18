@@ -120,10 +120,16 @@ class UrbanWithNavBar extends Component {
   
   this.state = {
     _initialRoute : 'SplashScreen',
+    R : '',
+    G : '',
+    B : '',
+    Color : "rgb(100,82,57)"
   }
 
 
 }
+
+
 
 renderScene(route,navigator){
   
@@ -235,12 +241,32 @@ configureScene(route){
 }
   
   
+componentDidMount(){
+  this.getNavColorFromFirebase()
+}
+_componentWillMount(){
+  //this.getNavColorFromFirebase()
+  var R = "800,"
+  var G = "82,"
+  var B = "57"
+  var finColor = "rgb("+R+G+B+")"
+  this.setState({
+    Color : finColor
+  })
+}
+
 getNavColorFromFirebase(){
-  firebase.database().ref('AppProps/navBarColor').on('value',(snap)=>{
-    var color = snap.val()
-    alert(typeof(color))
+
+  firebase.database().ref('AppProps/navBarColor/R').on('value',(snap)=>{
+    var _R = snap.val()
+    var _G = snap.val()
+    var _B = snap.val()
+    var finColor = "rgb("+_R+")"
+    
+    //var finColor = "rgb("+_R+","+_G+","+_B+")"
+
     this.setState({
-      navBarColor : color
+      Color : finColor
     })
   })
 }
@@ -257,7 +283,7 @@ getNavColorFromFirebase(){
       
       navigationBar={
       <Navigator.NavigationBar
-      style={{backgroundColor : "#00bcd4"}}
+      style={{backgroundColor : this.state.Color}}
       routeMapper={NavigationBarRouteMapper} />
       }  
 
